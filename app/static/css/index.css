@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: var(--surface2); /* Light background */
+    color: #333; /* Dark text */
+}
+.sidebar {
+    background-color: var(--surface4); /* Light gray for sidebar */
+    color: #333; /* Dark text for sidebar */
+    width: 10%;
+    min-width: 200px;
+    transition: width 0.3s;
+    overflow-x: hidden;
+    position: relative;
+    border-right: 1px solid #ccc; /* Light border */
+}
+
+.minimized #sidebar {
+    min-width: 60px;
+    width: 60px;
+}
+.minimized #sidebar-content {
+    visibility: hidden;
+}
+#sidebar-content {
+    padding-right: 10%;
+    margin-top: 60px;
+}
+#sidebar-content h2 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--primary); /* Darker shade for sidebar heading */
+}
+#toggle-button {
+    background-color: var(--primary); /* Darker color for toggle button */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+}
+#toggle-button:hover {
+    background-color: var(--primary-hover); /* Darker shade on hover */
+}
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #FFF; /* White background for main content */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the top */
+    transition: margin-left 0.3s ease;
+}
+
+.main-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary); /* Darker color for main heading */
+}
+
+.form-container {
+    background-color: var(--surface2); /* Light gray for form background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    height: fit-content;
+    margin: 0 auto;
+}
+.form-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary); /* Darker color for main heading */
+    text-align: left; /* Left align heading */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333; /* Dark text for labels */
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--primary); /* Darker border */
+    border-radius: 4px;
+    background-color: #FFF; /* White background */
+    color: #333; /* Dark text color */
+}
+
+input[type="text"], textarea {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--primary); /* Darker border */
+    border-radius: 4px;
+    background-color: #FFF; /* White background */
+    color: #333; /* Dark text color */
+}
+button, input[type="submit"] {
+    background-color: var(--primary); /* Darker color for submit button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+button:hover, input[type="submit"]:hover {
+    background-color: var(--primary-hover); /* Lighter color on hover */
+}
+.danger-button {
+    background-color: var(--danger); /* Darker color for submit button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+.danger-button:hover {
+    background-color: var(--danger-hover); /* Lighter color on hover */
+}
+.clickable-div {
+    background-color: var(--surface3); /* Light gray space cadet */
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.clickable-div:hover {
+    background-color: #EEEEF3; /* Slightly darker shade */
+}
+input:disabled, textarea:disabled, select:disabled {
+    background-color: #f0f0f0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.remove_session {
+    margin: 0px 5px 5px 5px;
+    width: 90%;
+    background-color: var(--danger);
+}
+
+.remove_session:hover {
+    background-color: var(--danger-hover);
+}

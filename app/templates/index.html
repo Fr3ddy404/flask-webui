@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+    <script src="{{ url_for('static', filename= 'js/index.js') }}"></script>
+    <title>Simple Chat Interface with Spoilers</title>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <button id="toggle-button">☰</button>
+        <div id="sidebar-content">
+            <h2>Sessions</h2>
+            <ul id="sessions">
+                {% include 'sessions.html' %}
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">       
+        <div class="form-container">
+            <h1>New Session</h1>
+            <form id="form" method="post">
+                <div class="form-group">
+                    <label for="name">Session Name:</label>
+                    <input type="text" id="name" name="name">
+                    <br><br>
+                    <label for="prompt_selector">Select Prompt:</label>
+                    <select name="select_prompt" id="select_prompt" onchange="handleSelectionChange()">
+                        {% for name in prompt_id_names %}
+                            <option value="{{ name[0] }}">{{ name[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br><br><br>
+                    <label for="prompt_name">Edit Prompt Name:</label>
+                    <input type="text" id="prompt_name" name="prompt_name">
+                    <br>
+                    <label for="prompt">Prompt:</label>
+                    <textarea id="prompt" name="prompt" rows="10" cols="50"></textarea>
+                </div>
+                <button type="button" id="deletePromptButton" class="danger-button">Delet Prompt</button>
+                <br><br>
+                    <input class="button" type="submit" value="Create" style="margin-right: 5px;" onclick="submitForm('/create-session')">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        handleSelectionChange()
+        const toggleButton = document.getElementById('toggle-button');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('minimized');
+        });
+
+        function add(button) {
+            button.addEventListener('click', event => {
+                fetch('/remove-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({"session_id": button.value })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sessions').innerHTML = data;
+                    remove_buttons = document.querySelectorAll('.remove_session');
+                    remove_buttons.forEach(button => add(button));
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error removing session: ' + (error.message || 'Unknown error'));
+                });
+            })
+        }
+
+    remove_buttons = document.querySelectorAll('.remove_session');
+    remove_buttons.forEach(button => add(button));
+    
+    deletePromptButton.addEventListener('click', () => {
+            const input = document.getElementById("prompt_name");
+            const textarea = document.getElementById("prompt");
+            const select = document.getElementById('select_prompt');
+
+            input.value = '';
+            textarea.value = '';
+            fetch('/remove-prompt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"prompt_id": select.value })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error removing prompt: ' + (error.message || 'Unknown error'));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+flask
+Flask-SQLAlchemy
+Flask-SocketIO
+langchain_core
+langchain-ollama
+beautifulsoup4

@@ -1,0 +1,10 @@
+{% for session in sessions %}
+    <div class="clickable-div">
+        <a href="{{  url_for('chat', session_id=session[0].session_id) }}" style="text-decoration: none; color: black;">
+            <label>{{ session[0].name }}:</label>
+            <p>Prompt: {{ session[0].prompt_name }}</p>
+        </a>
+        <button class="remove_session" id="{{ session[0].session_id }}" value="{{ session[0].session_id }}">🗑️</button>
+        
+    </div>
+{% endfor %}
