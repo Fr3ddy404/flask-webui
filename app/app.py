@@ -1,4 +1,4 @@
-# run: FLASK_APP=views FLASK_ENV=development flask --debug run
+# run: FLASK_APP=app/views FLASK_ENV=development flask --debug run
 
 from flask import Flask
 from flask_socketio import SocketIO
